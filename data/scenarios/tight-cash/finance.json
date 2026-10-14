@@ -1,0 +1,81 @@
+{
+  "opening": 450000,
+  "terms": {
+    "Northline Retail": 40,
+    "Maple Fresh Foods": 31,
+    "Lakeshore Auto Parts": 55,
+    "Great Lakes Steel": 40,
+    "Laurentian Paper": 40,
+    "Northern Fuels": 25
+  },
+  "ar": [
+    {
+      "id": "INV-10421",
+      "party": "Northline Retail",
+      "amt": 93200,
+      "t": 6360
+    },
+    {
+      "id": "INV-10433",
+      "party": "Maple Fresh Foods",
+      "amt": 46100,
+      "t": 7800
+    },
+    {
+      "id": "INV-10440",
+      "party": "Lakeshore Auto Parts",
+      "amt": 37400,
+      "t": 9240
+    },
+    {
+      "id": "INV-10446",
+      "party": "Other shippers (batch)",
+      "amt": 106000,
+      "t": 9240
+    },
+    {
+      "id": "INV-10458",
+      "party": "Northern Fuels",
+      "amt": 14400,
+      "t": 10680
+    },
+    {
+      "id": "INV-10447",
+      "party": "Great Lakes Steel",
+      "amt": 25600,
+      "t": 13560
+    },
+    {
+      "id": "INV-10452",
+      "party": "Laurentian Paper",
+      "amt": 21800,
+      "t": 15000
+    }
+  ],
+  "ap": [
+    {
+      "id": "Lakeshore Truck Service",
+      "party": "Shop repairs (December)",
+      "amt": 24600,
+      "t": 2280
+    },
+    {
+      "id": "Northway Fuel",
+      "party": "Diesel (bi-weekly)",
+      "amt": 216000,
+      "t": 3480
+    },
+    {
+      "id": "Payroll",
+      "party": "Driver and staff payroll",
+      "amt": 162300,
+      "t": 4920
+    },
+    {
+      "id": "Equipment leases",
+      "party": "Tractor and trailer leases",
+      "amt": 96500,
+      "t": 9240
+    }
+  ]
+}

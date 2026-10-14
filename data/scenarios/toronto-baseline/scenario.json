@@ -1,0 +1,41 @@
+{
+  "id": "toronto-baseline",
+  "name": "Baseline week: Toronto–Montreal corridor",
+  "description": "50 trucks, 57 drivers and 49 loads running Ontario, Quebec and the US Northeast, starting Tuesday 10:45 AM.",
+  "schema": 1,
+  "clock": {"date":[2026,0,20],"startMinute":645},
+  "economics": {"fleetTrucks":50,"kmPerDay":560,"emptyShare":0.1035,"ratePerKm":1.95,"mf":0.0946},
+  "onCall": ["Kevin Brown","Andrew Scott","Maria Santos"],
+  "checkRoute": [
+    [-74.73,45.03],
+    [-75.25,44.88],
+    [-75.68,44.62],
+    [-76.1,44.4],
+    [-76.5,44.27],
+    [-76.85,44.24],
+    [-77.38,44.18],
+    [-78.3,43.97],
+    [-78.85,43.9],
+    [-79.1,43.82],
+    [-79.4,43.74]
+  ],
+  "levers": [
+    {
+      "k": "G:routes",
+      "keys": ["opp0","opp1","opp2","opp3","opp4","opp5"],
+      "label": "Apply the 6 lane changes from Route Optimization",
+      "area": "Empty km",
+      "page": "route"
+    },
+    {
+      "k": "G:samples",
+      "keys": ["sample0","sample1","sample2"],
+      "label": "Adopt the 3 optimized routes (Toronto–Montreal, Windsor–Toronto, Toronto–Ottawa)",
+      "area": "Empty km",
+      "page": "route"
+    },
+    {"k":"G:merge","keys":["rec0"],"label":"Consolidate Toronto → Montreal part loads L-3 and L-7","area":"Margin","page":"route"},
+    {"k":"G:reprice","keys":["reprice"],"label":"Apply the fuel-surcharge update to 3 under-priced lanes","area":"Margin","page":"bid"},
+    {"k":"G:rebal","keys":["rec3"],"label":"Rebalance Thursday dispatch (move 3 loads to Wednesday)","area":"On-time","page":"labour"}
+  ]
+}

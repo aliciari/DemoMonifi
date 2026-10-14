@@ -1,0 +1,55 @@
+<!-- ============ FREIGHT BIDDING ============ -->
+<sc-if value="{{is.bid}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div>
+<h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #0f172a">Freight Bidding &amp; Estimation</h1>
+<p style="margin: 6px 0 0; font-size: 13px; color: #6b7280">Fleet sizing • Lane cost modeling • Competitive analysis</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
+<sc-for list="{{bids}}" as="b" hint-placeholder-count="3">
+<button type="button" onClick="{{b.pick}}" aria-pressed="{{b.on}}" style="text-align: left; background: {{b.bg}}; border: 1px solid {{b.bd}}; border-radius: 10px; padding: 14px 16px; color: #1f2937; display: flex; flex-direction: column; gap: 8px">
+<span style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%; gap: 8px"><span><span style="display: block; font-weight: 700; font-size: 15px">{{b.city}}</span><span style="display: block; font-size: 11px; color: #6b7280">{{b.meta}}</span></span><span style="font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(59,130,246,.18); color: #1d4ed8">{{b.term}}</span></span>
+<span style="display: flex; gap: 32px"><span><span style="display: block; font-size: 11px; color: #6b7280">Est. revenue</span><span style="display: block; font-weight: 700; color: #0f172a">{{b.rev}}</span></span><span><span style="display: block; font-size: 11px; color: #6b7280">Margin</span><span style="display: block; font-weight: 700">{{b.margin}}</span></span></span>
+<span style="font-size: 11px; color: #6b7280">Deadline: <span style="color: #b45309">{{b.deadline}}</span> • <span style="color: {{b.statusFg}}; font-weight: 600">{{b.statusTxt}}</span></span>
+</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
+<section style="flex: 3 1 440px; min-width: 0; background: #ffffff; border: 1px solid #e3e7ed; border-radius: 10px; padding: 16px">
+<h2 style="margin: 0 0 14px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #4b5563">Fleet Sizing: Standard vs Optimized — {{bid.city}}</h2>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px">
+<div style="flex: 1 1 180px; background: #f4f6f9; border: 1px solid #d5dae2; border-radius: 10px; padding: 16px; text-align: center">
+<div style="font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: #6b7280">Standard Model</div>
+<div style="margin-top: 6px; font-size: 36px; font-weight: 700">{{bid.stdTrucks}}</div><div style="font-size: 12px; color: #6b7280">tractors</div>
+<div style="margin-top: 6px; font-size: 13px">{{bid.stdDepots}} terminals</div>
+<div style="margin-top: 10px; background: #eceff3; border-radius: 6px; padding: 8px"><div style="font-size: 18px; font-weight: 700">{{bid.stdCost}}</div><div style="font-size: 11px; color: #6b7280">annual cost</div></div>
+</div>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e3a6e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+<div style="flex: 1 1 180px; background: rgba(108,179,227,.08); border: 2px solid #6cb3e3; border-radius: 10px; padding: 16px; text-align: center">
+<div style="font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: #1d6fa5">Optimized Model</div>
+<div style="margin-top: 6px; font-size: 36px; font-weight: 700; color: #0f172a">{{bid.optTrucks}}</div><div style="font-size: 12px; color: #6b7280">tractors</div>
+<div style="margin-top: 6px; font-size: 13px">{{bid.optDepots}} terminals</div>
+<div style="margin-top: 10px; background: #eceff3; border-radius: 6px; padding: 8px"><div style="font-size: 18px; font-weight: 700; color: #0f172a">{{bid.optCost}}</div><div style="font-size: 11px; color: #6b7280">annual cost</div></div>
+</div>
+</div>
+<div style="margin-top: 14px; background: rgba(108,179,227,.12); border-radius: 8px; padding: 10px; text-align: center; font-weight: 600; color: #1d4f91">{{bid.saving}}</div>
+<div style="margin-top: 10px; font-size: 12px; color: #4b5563">Based on your live fleet: {{bid.fleetNote}}</div>
+</section>
+<section style="flex: 2 1 300px; min-width: 0; background: #ffffff; border: 1px solid #e3e7ed; border-radius: 10px; padding: 16px; display: flex; flex-direction: column">
+<h2 style="margin: 0 0 6px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #4b5563">Competitive Position</h2>
+<div style="font-size: 11px; color: #6b7280; margin-bottom: 8px">Competing carriers</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; justify-content: space-between; align-items: center; background: #f4f6f9; border-radius: 6px; padding: 8px 10px"><span style="font-size: 13px">Ridgeway Freight</span><span style="font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(245,158,11,.16); color: #b45309">Active bidder</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; background: #f4f6f9; border-radius: 6px; padding: 8px 10px"><span style="font-size: 13px">Northbound Carriers</span><span style="font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(245,158,11,.16); color: #b45309">Active bidder</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; background: #f4f6f9; border-radius: 6px; padding: 8px 10px"><span style="font-size: 13px">CrossLane Logistics</span><span style="font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(245,158,11,.16); color: #b45309">Active bidder</span></div>
+</div>
+<div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #e3e7ed">
+<div style="font-size: 11px; color: #6b7280; margin-bottom: 8px">Recommended rate range</div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0"><span>Conservative</span><span style="font-weight: 700">{{bid.cons}}</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0"><span>Aggressive</span><span style="font-weight: 700; color: #0f172a">{{bid.aggr}}</span></div>
+</div>
+<button type="button" onClick="{{bidSubmit.click}}" style="margin-top: auto; min-height: 40px; border: 0; border-radius: 8px; background: {{bidSubmit.bg}}; color: {{bidSubmit.fg}}; font-size: 13px; font-weight: 700">{{bidSubmit.label}}</button>
+</section>
+</div>
+</div>
+</sc-if>

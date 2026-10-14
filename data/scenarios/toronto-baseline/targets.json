@@ -1,0 +1,77 @@
+{
+  "params": {
+    "deadlines": [30,60,90],
+    "D0": 43,
+    "rBase": 0.98,
+    "excDay": 1.6,
+    "lExc": 0.75,
+    "lExcTight": 1,
+    "pFail": 0.7,
+    "lBd": 1,
+    "bdCost": 2150,
+    "serviceCost": 650,
+    "penalty": 250,
+    "shopAvg": 4,
+    "lpt": 0.955,
+    "utilDen": 56.5,
+    "kmDay": 28000,
+    "partnerDay": 340,
+    "trainCost": 600,
+    "deposit": 40000,
+    "growthPerMonth": 0.02
+  },
+  "measures": [
+    {"k":"otd","label":"On-time delivery","unit":"%","up":true,"def":[95,95.5,96],"dec":1},
+    {"k":"margin","label":"Operating margin","unit":"%","up":true,"def":[8,8.5,9],"dec":2},
+    {"k":"empty","label":"Empty kilometres","unit":"%","up":false,"def":[10,9.5,9],"dec":2},
+    {"k":"cover","label":"Capacity coverage","unit":"%","up":true,"def":[98,99,99],"dec":1},
+    {"k":"util","label":"Fleet utilization","unit":"%","up":true,"def":[75,78,81],"dec":1},
+    {"k":"cash","label":"Minimum cash balance","unit":"$K","up":true,"def":[250,275,300],"dec":0}
+  ],
+  "packages": [
+    {
+      "id": "P:routes",
+      "label": "Network route plan",
+      "what": "Apply the 6 lane changes, adopt the 3 optimized routes and consolidate part loads L-3 and L-7.",
+      "done": ["opp0","opp1","opp2","opp3","opp4","opp5","sample0","sample1","sample2","rec0"],
+      "lead": "Takes effect from the next dispatch cycle."
+    },
+    {
+      "id": "P:reliability",
+      "label": "Fleet reliability",
+      "what": "Book service for every truck with a predicted failure or overdue maintenance, and replace TRK006 (2018 Mack).",
+      "done": ["rec1"],
+      "service": true,
+      "lead": "Replacement tractor arrives in 30 days; services this week."
+    },
+    {
+      "id": "P:partner",
+      "label": "Contract 2 dedicated partner trucks",
+      "what": "Contract Quinte Freight for 2 dedicated dry vans from Thursday at a $340 per truck-day premium.",
+      "flags": {"partnerCap":true},
+      "lead": "Available from day 3."
+    },
+    {
+      "id": "P:pricing",
+      "label": "Pricing update",
+      "what": "Apply the fuel-surcharge update and reprice the 3 under-margin lanes. About 1% of volume is expected to move to other carriers.",
+      "done": ["reprice"],
+      "lead": "New rates apply to tenders from tomorrow."
+    },
+    {
+      "id": "P:people",
+      "label": "Dispatch and driver plan",
+      "what": "Rebalance Thursday dispatch and enrol high-idle drivers in idle-reduction training.",
+      "done": ["rec3"],
+      "training": true,
+      "lead": "Training takes about 2 weeks to show in fuel use."
+    },
+    {
+      "id": "P:collect",
+      "label": "Early-payment program",
+      "what": "Offer Northline Retail and Maple Fresh Foods a 1% discount to pay in 20 days instead of 30.",
+      "flags": {"collections":true},
+      "lead": "Applies to receipts from day 8."
+    }
+  ]
+}

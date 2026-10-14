@@ -1,0 +1,59 @@
+<!-- ============ CAPABILITIES ============ -->
+<sc-if value="{{is.caps}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-direction: column; gap: 28px; max-width: 1240px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px">
+<div style="flex: 1 1 520px; max-width: 760px">
+<div style="font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #1d6fa5">Monifi Platform</div>
+<h1 style="margin: 10px 0 0; font-size: 34px; line-height: 1.2; font-weight: 700; color: #0f172a">Plan from your targets. Replan as conditions change.</h1>
+<p style="margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: #4b5563">Monifi starts with your future targets, determines what must happen today to achieve them, and continuously replans as conditions change. Live operations, lane optimization, cost control, telematics and safety all work from the same plan.</p>
+</div>
+<button type="button" onClick="{{runDemo}}" style="min-height: 44px; display: flex; align-items: center; gap: 8px; padding: 0 20px; border: 0; border-radius: 8px; background: #1e3a6e; color: #ffffff; font-size: 14px; font-weight: 700">Run Demo<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px">
+<sc-for list="{{outcomes}}" as="o" hint-placeholder-count="4">
+<div style="background: #eef6fc; border: 1px solid #c6e2f5; border-radius: 12px; padding: 18px">
+<div style="font-size: 30px; font-weight: 700; color: #1e3a6e">{{o.value}}</div>
+<div style="margin-top: 6px; font-weight: 600; color: #0f172a">{{o.label}}</div>
+<div style="margin-top: 2px; font-size: 12px; color: #4b5563">{{o.sub}}</div>
+</div>
+</sc-for>
+</div>
+<sc-for list="{{capGroups}}" as="g" hint-placeholder-count="4">
+<section style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px">
+<h2 style="display: flex; align-items: center; gap: 10px; margin: 0; font-size: 18px; font-weight: 700; color: #0f172a"><span style="width: 12px; height: 12px; border-radius: 3px; background: {{g.color}}"></span>{{g.title}}</h2>
+<span style="font-size: 13px; color: #6b7280">{{g.desc}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px">
+<sc-for list="{{g.items}}" as="c" hint-placeholder-count="3">
+<article style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 1px 2px rgba(15,23,42,.04)">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px">
+<h3 style="margin: 0; font-size: 16px; font-weight: 700; color: #0f172a">{{c.name}}</h3>
+<span style="font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: {{g.tint}}; color: {{g.ink}}; white-space: nowrap">{{g.short}}</span>
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4b5563">{{c.desc}}</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px">
+<sc-for list="{{c.features}}" as="f" hint-placeholder-count="3"><li style="display: flex; gap: 8px; font-size: 13px; color: #1f2937"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e3a6e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 2px"><path d="M5 12l5 5 9-10"></path></svg><span>{{f}}</span></li></sc-for>
+</ul>
+<div style="margin-top: auto; padding-top: 12px; border-top: 1px solid #eef0f3; display: flex; justify-content: space-between; align-items: center; gap: 10px">
+<div><div style="font-size: 18px; font-weight: 700; color: #0f172a">{{c.metric}}</div><div style="font-size: 11px; color: #6b7280">{{c.metricLabel}}</div></div>
+<button type="button" onClick="{{c.go}}" aria-label="Open {{c.name}}" style="min-height: 36px; display: flex; align-items: center; gap: 6px; padding: 0 12px; border: 1px solid #d5dae2; border-radius: 8px; background: #ffffff; color: #1d6fa5; font-size: 12px; font-weight: 700">Open<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+</sc-for>
+<section style="background: #f8fafc; border: 1px solid #e3e7ed; border-radius: 12px; padding: 20px">
+<h2 style="margin: 0 0 14px; font-size: 18px; font-weight: 700; color: #0f172a">How it works</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="3">
+<div style="display: flex; gap: 12px">
+<span style="width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; background: #1e3a6e; color: #ffffff; font-weight: 700; display: flex; align-items: center; justify-content: center">{{s.n}}</span>
+<div><div style="font-weight: 700; color: #0f172a">{{s.title}}</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.5; color: #4b5563">{{s.desc}}</div></div>
+</div>
+</sc-for>
+</div>
+</section>
+</div>
+</sc-if>

@@ -1,0 +1,49 @@
+<!-- ============ LIVE DISPATCH ============ -->
+<sc-if value="{{is.dispatch}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div>
+<h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #0f172a">Live Dispatch</h1>
+<p style="margin: 6px 0 0; font-size: 13px; color: #6b7280">Real-time driver communication • Alert management</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+<div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<section style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 10px; padding: 16px">
+<h2 style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #4b5563">Send a message</h2>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 13px; color: #374151">
+<span>To:</span><span style="font-weight: 700; color: #0f172a; padding: 4px 10px; border-radius: 999px; background: rgba(108,179,227,.16)">{{dispatchToTxt}}</span>
+<sc-if value="{{hasDispatchTo}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{toAll}}" style="min-height: 30px; padding: 0 10px; border: 1px solid #d5dae2; border-radius: 6px; background: #ffffff; color: #1d6fa5; font-size: 12px; font-weight: 600">Send to everyone instead</button></sc-if>
+</div>
+<label for="fc-broadcast" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Message</label>
+<textarea id="fc-broadcast" value="{{msg}}" onChange="{{onMsg}}" placeholder="Type a message, or use a quick button below" rows="4" style="width: 100%; box-sizing: border-box; resize: vertical; background: #f4f6f9; border: 1px solid #d5dae2; border-radius: 8px; padding: 10px 12px; color: #1f2937; font-size: 13px"></textarea>
+<div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" onClick="{{sendEmergency}}" style="min-height: 36px; padding: 0 14px; border: 0; border-radius: 6px; background: #dc2626; color: #fff; font-size: 12px; font-weight: 700">Emergency Alert</button>
+<button type="button" onClick="{{sendWeather}}" style="min-height: 36px; padding: 0 14px; border: 1px solid #d5dae2; border-radius: 6px; background: transparent; color: #1f2937; font-size: 12px; font-weight: 600">Weather Warning</button>
+<button type="button" onClick="{{sendGeneral}}" style="min-height: 36px; padding: 0 14px; border: 0; border-radius: 6px; background: #1e3a6e; color: #ffffff; font-size: 12px; font-weight: 700">Send Message</button>
+</div>
+</section>
+<section style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 10px; padding: 16px">
+<h2 style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #4b5563">Message log ({{msgCount}})</h2>
+<div style="display: flex; flex-direction: column; gap: 6px; max-height: 320px; overflow-y: auto">
+<sc-for list="{{messages}}" as="m" hint-placeholder-count="2">
+<div style="background: #f4f6f9; border-radius: 8px; padding: 8px 10px; box-shadow: inset 3px 0 0 {{m.color}}"><div style="display: flex; justify-content: space-between; gap: 8px; font-size: 11px; color: #6b7280"><span style="font-weight: 700; color: #0f172a">{{m.to}}</span><span>{{m.t}}</span></div><div style="margin-top: 2px; font-size: 13px; color: #374151">{{m.text}}</div></div>
+</sc-for>
+<sc-if value="{{noMessages}}" hint-placeholder-val="{{false}}"><div style="font-size: 13px; color: #6b7280">No messages sent yet this session.</div></sc-if>
+</div>
+</section>
+</div>
+<section style="flex: 1 1 380px; min-width: 0; background: #ffffff; border: 1px solid #e3e7ed; border-radius: 10px; padding: 16px">
+<h2 style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #4b5563">Drivers on route ({{ds.onRoute}})</h2>
+<div style="display: flex; flex-direction: column; gap: 6px; max-height: 560px; overflow-y: auto">
+<sc-for list="{{onRoute}}" as="d" hint-placeholder-count="8">
+<div style="display: flex; align-items: center; gap: 8px; background: {{d.bg}}; border-radius: 8px; padding: 6px 6px 6px 12px">
+<span style="width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: {{d.color}}"></span>
+<div style="flex-grow: 1; min-width: 0"><div style="font-weight: 600; font-size: 13px">{{d.name}} <span style="font-weight: 500; color: #6b7280">• {{d.truck}}</span></div><div style="font-size: 11px; color: #6b7280; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{d.lane}} • {{d.phone}}</div></div>
+<button type="button" onClick="{{d.call}}" aria-label="Message {{d.name}}" style="width: 36px; height: 36px; border: 0; border-radius: 6px; background: transparent; color: #4b5563; display: flex; align-items: center; justify-content: center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"></path></svg></button>
+<button type="button" onClick="{{d.locate}}" aria-label="Locate {{d.name}} on the map" style="width: 36px; height: 36px; border: 0; border-radius: 6px; background: transparent; color: #4b5563; display: flex; align-items: center; justify-content: center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6-7-12a7 7 0 0 1 14 0c0 6-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></button>
+</div>
+</sc-for>
+</div>
+</section>
+</div>
+</div>
+</sc-if>

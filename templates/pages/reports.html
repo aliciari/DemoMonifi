@@ -1,0 +1,95 @@
+<!-- ============ REPORTS ============ -->
+<sc-if value="{{is.reports}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px">
+<div>
+<h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #0f172a">Reports</h1>
+<p style="margin: 6px 0 0; font-size: 13px; color: #6b7280">Planning reports from the current scenario • Standard trucking reports • Scheduled delivery</p>
+</div>
+<button type="button" onClick="{{newReport.click}}" style="min-height: 40px; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 0; border-radius: 8px; background: {{newReport.bg}}; color: {{newReport.fg}}; font-size: 13px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>{{newReport.label}}</button>
+</div>
+<section aria-label="Planning reports" style="background: #ffffff; border: 1px solid #1e3a6e; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px">
+<div style="flex: 1 1 420px"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #0f172a">Planning reports</h2><span style="font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: #fef3c7; color: #78350f">Synthetic demo data</span></div><p style="margin: 4px 0 0; font-size: 13px; color: #6b7280">Generated from the current simulation state. Every file states the planning period, scenario and assumptions.</p></div>
+<button type="button" onClick="{{printSummary}}" style="min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; border: 0; border-radius: 8px; background: #1e3a6e; color: #ffffff; font-size: 13px; font-weight: 700; white-space: nowrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2"></path><path d="M6 14h12v7H6z"></path></svg>Print-friendly summary (PDF)</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 12px">
+<div style="padding: 10px 12px; border-radius: 8px; background: #f5f8fc"><div style="color: #6b7280">Planning period</div><div style="margin-top: 2px; font-weight: 700; color: #0f172a">{{repPeriod}}</div></div>
+<div style="padding: 10px 12px; border-radius: 8px; background: #f5f8fc"><div style="color: #6b7280">Scenario</div><div style="margin-top: 2px; font-weight: 700; color: #0f172a">{{repScenario}}</div></div>
+<div style="padding: 10px 12px; border-radius: 8px; background: #f5f8fc"><div style="color: #6b7280">Approved decisions</div><div style="margin-top: 2px; font-weight: 700; color: #0f172a">{{repDecisions}}</div></div>
+<div style="padding: 10px 12px; border-radius: 8px; background: #f5f8fc"><div style="color: #6b7280">Goals</div><div style="margin-top: 2px; font-weight: 700; color: #0f172a">{{repGoals}}</div></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px">
+<sc-for list="{{planReports}}" as="r" hint-placeholder-count="5">
+<article style="border: 1px solid #e3e7ed; border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 8px">
+<h3 style="margin: 0; font-size: 14px; font-weight: 700; color: #0f172a">{{r.name}}</h3>
+<p style="margin: 0; font-size: 12px; line-height: 1.5; color: #4b5563">{{r.desc}}</p>
+<div style="font-size: 12px; font-weight: 600; color: #1d4f91">{{r.live}}</div>
+<button type="button" onClick="{{r.csv}}" style="margin-top: auto; min-height: 36px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #1e3a6e; border-radius: 8px; background: #ffffff; color: #1e3a6e; font-size: 12px; font-weight: 700"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Download CSV</button>
+</article>
+</sc-for>
+</div>
+<details style="font-size: 12px; color: #374151"><summary style="cursor: pointer; font-weight: 700; color: #1d6fa5">Assumptions used in every report</summary><ul style="margin: 8px 0 0; padding-left: 18px; line-height: 1.6"><sc-for list="{{assumptions}}" as="as" hint-placeholder-count="6"><li>{{as}}</li></sc-for></ul></details>
+<sc-if value="{{dl.has}}" hint-placeholder-val="{{false}}">
+<div role="status" style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid rgba(245,158,11,.45); background: rgba(245,158,11,.08); border-radius: 10px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><div style="font-size: 13px; color: #78350f"><b>The browser blocked the download.</b> Copy the contents of {{dl.name}} below and save it as a file.</div><button type="button" onClick="{{dl.close}}" style="min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; border: 1px solid #1e3a6e; border-radius: 8px; background: #ffffff; color: #1e3a6e; font-size: 13px; font-weight: 700; white-space: nowrap">Close</button></div>
+<textarea readonly="readonly" rows="8" value="{{dl.data}}" aria-label="File contents" style="width: 100%; box-sizing: border-box; font-family: ui-monospace, Menlo, monospace; font-size: 11px; border: 1px solid #d5dae2; border-radius: 6px; padding: 8px"></textarea>
+</div>
+</sc-if>
+</section>
+<h2 style="margin: 8px 0 0; font-size: 18px; font-weight: 700; color: #0f172a">Standard report library</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px">
+<sc-for list="{{repSummary}}" as="m" hint-placeholder-count="4">
+<div style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 16px"><div style="font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #6b7280">{{m.label}}</div><div style="margin-top: 6px; font-size: 24px; font-weight: 700; color: #0f172a">{{m.value}}</div><div style="margin-top: 4px; font-size: 12px; color: #6b7280">{{m.sub}}</div></div>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div role="group" aria-label="Report category" style="display: flex; flex-wrap: wrap; gap: 6px; flex: 1 1 520px">
+<sc-for list="{{repCats}}" as="c" hint-placeholder-count="6"><button type="button" onClick="{{c.pick}}" aria-pressed="{{c.on}}" style="min-height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid {{c.bd}}; background: {{c.bg}}; color: {{c.fg}}; font-size: 12px; font-weight: 600">{{c.label}} <span style="font-weight: 500; opacity: .75">{{c.count}}</span></button></sc-for>
+</div>
+<label style="flex: 0 1 280px; display: flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 12px; background: #ffffff; border: 1px solid #d5dae2; border-radius: 8px; color: #6b7280"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search reports</span><input type="search" value="{{repQ}}" onChange="{{onRepQ}}" placeholder="Search reports" style="flex-grow: 1; min-width: 0; border: 0; outline: none; background: transparent; color: #0f172a; font-size: 13px"></label>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px">
+<sc-for list="{{repList}}" as="r" hint-placeholder-count="9">
+<article style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 1px 2px rgba(15,23,42,.04)">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px">
+<h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #0f172a">{{r.name}}</h3>
+<span style="font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: {{r.catBg}}; color: {{r.catFg}}; white-space: nowrap">{{r.cat}}</span>
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #4b5563">{{r.desc}}</p>
+<div style="font-size: 12px; color: #1d4f91; font-weight: 600">{{r.live}}</div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 11px; color: #6b7280"><span>{{r.freq}}</span><span>Last run: {{r.last}}</span><span>{{r.fmt}}</span></div>
+<sc-if value="{{r.isSched}}" hint-placeholder-val="{{false}}"><div style="font-size: 11px; font-weight: 600; color: #1d4f91; background: rgba(108,179,227,.14); border-radius: 6px; padding: 5px 8px">Scheduled • {{r.freq}} to {{r.to}} • next {{r.next}}</div></sc-if>
+<div style="margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" onClick="{{r.run.click}}" style="flex: 1 1 110px; min-height: 36px; border: 1.5px solid {{r.run.bd}}; border-radius: 8px; background: {{r.run.bg}}; color: {{r.run.fg}}; font-size: 12px; font-weight: 700">{{r.run.label}}</button>
+<button type="button" onClick="{{r.toggle}}" aria-pressed="{{r.isSched}}" style="flex: 1 1 110px; min-height: 36px; border: 1px solid #d5dae2; border-radius: 8px; background: #ffffff; color: #1d6fa5; font-size: 12px; font-weight: 700">{{r.schedLabel}}</button>
+</div>
+</article>
+</sc-for>
+</div>
+<sc-if value="{{repEmpty}}" hint-placeholder-val="{{false}}"><div style="padding: 24px; text-align: center; font-size: 13px; color: #6b7280; background: #f8fafc; border: 1px dashed #d5dae2; border-radius: 12px">No reports match that search.</div></sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+<section style="flex: 3 1 520px; min-width: 0; background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 16px">
+<h2 style="margin: 0 0 10px; font-size: 16px; font-weight: 700; color: #0f172a">Scheduled deliveries ({{schedCount}})</h2>
+<div style="overflow-x: auto"><div style="min-width: 560px">
+<div style="display: grid; grid-template-columns: 1.8fr .9fr 1.3fr 1.1fr .8fr; gap: 8px; padding: 8px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #6b7280; border-bottom: 1px solid #e3e7ed"><span>Report</span><span>Frequency</span><span>Sent to</span><span>Next run</span><span>Format</span></div>
+<sc-for list="{{schedRows}}" as="r" hint-placeholder-count="7">
+<div style="display: grid; grid-template-columns: 1.8fr .9fr 1.3fr 1.1fr .8fr; gap: 8px; align-items: center; padding: 9px 8px; font-size: 13px; border-bottom: 1px solid #eef0f3"><span style="font-weight: 600; color: #0f172a">{{r.name}}</span><span style="color: #374151">{{r.freq}}</span><span style="color: #374151">{{r.to}}</span><span style="color: #374151">{{r.next}}</span><span style="color: #374151">{{r.fmt1}}</span></div>
+</sc-for>
+</div></div>
+</section>
+<section style="flex: 2 1 340px; min-width: 0; background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 16px">
+<h2 style="margin: 0 0 10px; font-size: 16px; font-weight: 700; color: #0f172a">Recent exports</h2>
+<div style="display: flex; flex-direction: column; gap: 6px; max-height: 420px; overflow-y: auto">
+<sc-for list="{{exportsList}}" as="e" hint-placeholder-count="5">
+<div style="display: flex; align-items: center; gap: 10px; background: #f8fafc; border: 1px solid #eef0f3; border-radius: 8px; padding: 8px 10px">
+<span style="width: 34px; height: 34px; flex-shrink: 0; border-radius: 6px; background: {{e.bg}}; color: {{e.fg}}; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center">{{e.type}}</span>
+<div style="flex-grow: 1; min-width: 0"><div style="font-size: 13px; font-weight: 600; color: #0f172a; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{e.name}}</div><div style="font-size: 11px; color: #6b7280">{{e.meta}}</div></div>
+<button type="button" onClick="{{e.btn.click}}" style="min-height: 32px; padding: 0 10px; border: 1px solid #d5dae2; border-radius: 6px; background: #ffffff; color: {{e.btn.tfg}}; font-size: 12px; font-weight: 600">{{e.btn.label}}</button>
+</div>
+</sc-for>
+</div>
+</section>
+</div>
+</div>
+</sc-if>

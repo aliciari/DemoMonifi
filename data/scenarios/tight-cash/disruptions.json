@@ -1,0 +1,120 @@
+{
+  "disruptions": {
+    "truck": {
+      "label": "Truck unavailable",
+      "load": "4562",
+      "truck": "TRK029",
+      "title": "TRK029 failed a roadside inspection near Oshawa",
+      "why": "A brake defect was found. TRK029 is out of service with Load #4562 on board.",
+      "act": 732,
+      "etaNull": true
+    },
+    "driver": {
+      "label": "Driver unavailable",
+      "load": "4577",
+      "truck": "TRK037",
+      "title": "Karen Campbell (TRK037) is unwell and has stopped near Barrie",
+      "why": "She cannot drive again today. Load #4577 needs another driver.",
+      "act": 729,
+      "etaNull": true
+    },
+    "loading": {
+      "label": "Loading delay",
+      "load": "4546",
+      "truck": "TRK042",
+      "title": "Crane breakdown at Great Lakes Steel, Hamilton",
+      "why": "Loading of TRK042 is delayed by 3 hours.",
+      "act": 765,
+      "delay": 180
+    },
+    "route": {
+      "label": "Route delay",
+      "load": "4502",
+      "truck": "TRK001",
+      "title": "Hwy 401 eastbound closed at Belleville after a collision",
+      "why": "Expected to reopen in about 3 hours. Loads heading east past Belleville are delayed.",
+      "act": 705,
+      "delay": 180
+    },
+    "supplier": {
+      "label": "Supplier delay",
+      "load": "4609",
+      "supplier": true,
+      "title": "Lakeshore Truck Service: repair parts delayed 24 hours",
+      "why": "TRK015, TRK038 and TRK049 leave the shop a day later than planned. Loads that depend on them must be re-covered.",
+      "act": 2040
+    },
+    "payment": {
+      "label": "Customer payment delay",
+      "load": null,
+      "invoice": "INV-10421",
+      "delayDays": 21,
+      "title": "Northline Retail will pay invoice INV-10421 ($93,200) 21 days late",
+      "why": "Their payables team is holding payments after a system change. Revenue and profit do not change; cash does.",
+      "act": 2040
+    },
+    "urgent": {
+      "label": "Additional urgent order",
+      "load": "4620",
+      "title": "Maple Fresh Foods added an urgent order for tonight",
+      "why": "22 pallets, Brampton to Montreal, due 11:30 PM. No truck is assigned yet.",
+      "act": 980
+    }
+  },
+  "recoveryPlans": {
+    "TRK012": {
+      "spare": "TRK002",
+      "driver": "Kevin Brown",
+      "from": "Toronto Hub",
+      "to": "Montreal",
+      "via": "Belleville",
+      "route": [
+        [-79.4,43.74],
+        [-79.1,43.82],
+        [-78.85,43.9],
+        [-78.3,43.97],
+        [-77.38,44.18],
+        [-76.85,44.24],
+        [-76.5,44.27],
+        [-76.1,44.4],
+        [-75.68,44.62],
+        [-75.25,44.88],
+        [-74.73,45.03],
+        [-74.3,45.22],
+        [-73.95,45.4],
+        [-73.62,45.47]
+      ],
+      "msg": "Pick up Load #4471 from TRK012 near Belleville and continue to Montreal. Reefer setpoint 36°F."
+    },
+    "TRK040": {
+      "spare": "TRK047",
+      "driver": "Andrew Scott",
+      "from": "Windsor Terminal",
+      "to": "Toronto",
+      "via": "London",
+      "route": [
+        [-83.03,42.31],
+        [-82.6,42.33],
+        [-82.18,42.4],
+        [-81.75,42.68],
+        [-81.25,42.95],
+        [-80.75,43.13],
+        [-80.3,43.4],
+        [-79.88,43.52],
+        [-79.6,43.68],
+        [-79.4,43.74]
+      ],
+      "msg": "Pick up Load #4466 from TRK040 near London and deliver to Toronto."
+    },
+    "TRK031": {
+      "spare": "TRK045",
+      "driver": "Maria Santos",
+      "from": "Toronto Hub",
+      "to": "Sudbury",
+      "via": "Barrie",
+      "route": [[-79.5,43.75],[-79.6,44.05],[-79.69,44.39],[-79.6,44.75],[-79.85,45],[-80.03,45.35],[-80.4,45.8],[-80.99,46.45]],
+      "msg": "Pick up Load #4474 from TRK031 near Barrie and continue to Sudbury."
+    }
+  },
+  "shop": {"supplier":"Lakeshore Truck Service","release":{"TRK015":2160,"TRK049":1740,"TRK038":2040}}
+}

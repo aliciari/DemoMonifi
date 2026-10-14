@@ -1,0 +1,84 @@
+<!-- ============ KPI SCORECARD ============ -->
+<sc-if value="{{is.kpi}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px">
+<div>
+<h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #0f172a">KPI Scorecard</h1>
+<p style="margin: 6px 0 0; font-size: 13px; color: #6b7280">Company and customer performance against target • Updates as you act on other pages</p>
+</div>
+<div role="group" aria-label="Reporting period" style="display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; background: #f4f6f9; border: 1px solid #e3e7ed; border-radius: 10px">
+<sc-for list="{{kpiPeriods}}" as="p" hint-placeholder-count="4"><button type="button" onClick="{{p.pick}}" aria-pressed="{{p.on}}" style="min-height: 34px; padding: 0 14px; border: 0; border-radius: 7px; background: {{p.bg}}; color: {{p.fg}}; font-size: 12px; font-weight: 600; box-shadow: {{p.shadow}}">{{p.label}}</button></sc-for>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+<sc-for list="{{kpiSummary}}" as="m" hint-placeholder-count="4">
+<div style="background: {{m.bg}}; border: 1px solid {{m.bd}}; border-radius: 12px; padding: 16px">
+<div style="font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #6b7280">{{m.label}}</div>
+<div style="margin-top: 6px; font-size: 26px; font-weight: 700; color: #0f172a">{{m.value}}</div>
+<div style="margin-top: 4px; font-size: 12px; font-weight: 600; color: {{m.subColor}}">{{m.sub}}</div>
+</div>
+</sc-for>
+</div>
+<sc-for list="{{kpiSections}}" as="sec" hint-placeholder-count="2">
+<section style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #0f172a">{{sec.title}}</h2>
+<span style="font-size: 13px; color: #6b7280">{{sec.sub}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px">
+<sc-for list="{{sec.items}}" as="k" hint-placeholder-count="8">
+<button type="button" onClick="{{k.go}}" title="{{k.def}}" style="text-align: left; background: #ffffff; border: 1px solid {{k.cardBd}}; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; color: #0f172a; cursor: pointer; box-shadow: 0 1px 2px rgba(15,23,42,.04)">
+<span style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; width: 100%"><span style="font-size: 13px; font-weight: 600; color: #374151">{{k.label}}</span><span style="font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; border: 1px solid {{k.stBd}}; background: {{k.stBg}}; color: {{k.stFg}}; white-space: nowrap">{{k.stLabel}}</span></span>
+<span style="display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px"><span style="font-size: 26px; font-weight: 700; color: #0f172a">{{k.value}}</span><span style="font-size: 12px; font-weight: 600; color: {{k.dColor}}">{{k.delta}}</span></span>
+<svg width="100%" height="36" viewBox="0 0 120 32" preserveAspectRatio="none" aria-hidden="true" style="display: block"><path d="{{k.tline}}" fill="none" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"></path><path d="{{k.spark}}" fill="none" stroke="{{k.sparkColor}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path></svg>
+<span style="display: flex; justify-content: space-between; gap: 8px; width: 100%; font-size: 11px; color: #6b7280"><span>Target {{k.targetTxt}}</span><span style="color: #1d6fa5; font-weight: 600">{{k.liveTxt}}</span></span>
+<span style="font-size: 11px; line-height: 1.45; color: #6b7280">{{k.def}}</span>
+</button>
+</sc-for>
+</div>
+</section>
+</sc-for>
+<sc-if value="{{mapleRisk}}" hint-placeholder-val="{{true}}">
+<section style="background: #fffbeb; border: 1px solid #fcd9a0; border-radius: 12px; padding: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18v.5"></path></svg>
+<div style="flex: 1 1 380px">
+<div style="font-weight: 700; color: #0f172a">Maple Fresh Foods is at risk</div>
+<div style="margin-top: 2px; font-size: 13px; line-height: 1.5; color: #374151">On-time delivery is {{maple.otd}} against a 95% target and claims are {{maple.cl}} of revenue, both driven by reefer failures. TRK012 is down near Belleville with their Load #4471.</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" onClick="{{openTrk012}}" style="min-height: 36px; padding: 0 14px; border: 1px solid #d5dae2; border-radius: 8px; background: #ffffff; color: #1d6fa5; font-size: 12px; font-weight: 700">View TRK012 on map</button>
+<button type="button" onClick="{{recover012}}" style="min-height: 36px; padding: 0 14px; border: 0; border-radius: 8px; background: #1e3a6e; color: #ffffff; font-size: 12px; font-weight: 700">Recover Load #4471 with TRK002</button>
+</div>
+</section>
+</sc-if>
+<sc-if value="{{mapleOk}}" hint-placeholder-val="{{false}}">
+<section style="background: #eef6fc; border: 1px solid #c6e2f5; border-radius: 12px; padding: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; color: #1e3a6e">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>
+<div style="flex: 1 1 380px"><div style="font-weight: 700">Maple Fresh Foods back from "At risk"</div><div style="margin-top: 2px; font-size: 13px; color: #374151">Load #4471 was moved to TRK002 before the cargo spoiled. On-time delivery is now {{maple.otd}} and projected claims {{maple.cl}}.</div></div>
+</section>
+</sc-if>
+<section style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 10px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #0f172a">Customer scorecard</h2>
+<span style="font-size: 13px; color: #6b7280">Last 12 months, by shipper • Today's loads in brackets</span>
+</div>
+<div style="overflow-x: auto"><div style="min-width: 920px">
+<div style="display: grid; grid-template-columns: 1.7fr 1fr .9fr .9fr .9fr .8fr .8fr .8fr .9fr; gap: 8px; padding: 10px 8px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #6b7280; border-bottom: 1px solid #e3e7ed"><span>Shipper</span><span>Revenue</span><span>Loads</span><span>On-time</span><span>Tender acc.</span><span>Dwell</span><span>Claims</span><span>Margin</span><span>Health</span></div>
+<sc-for list="{{custRows}}" as="c" hint-placeholder-count="7">
+<div style="display: grid; grid-template-columns: 1.7fr 1fr .9fr .9fr .9fr .8fr .8fr .8fr .9fr; gap: 8px; align-items: center; padding: 10px 8px; font-size: 13px; border-bottom: 1px solid #eef0f3">
+<span><span style="display: block; font-weight: 600; color: #0f172a">{{c.name}}</span><span style="display: block; margin-top: 4px; height: 4px; border-radius: 2px; background: #eef0f3"><span style="display: block; width: {{c.share}}; height: 4px; border-radius: 2px; background: #6cb3e3"></span></span></span>
+<span style="color: #0f172a; font-weight: 600">{{c.rev}} <span style="font-size: 11px; font-weight: 500; color: #6b7280">{{c.shareTxt}}</span></span>
+<span style="color: #374151">{{c.loads}} <span style="font-size: 11px; color: #6b7280">({{c.today}})</span></span>
+<span style="font-weight: 600; color: {{c.otdC}}">{{c.otd}}</span>
+<span style="font-weight: 600; color: {{c.tenC}}">{{c.ten}}</span>
+<span style="font-weight: 600; color: {{c.dwC}}">{{c.dw}}</span>
+<span style="font-weight: 600; color: {{c.clC}}">{{c.cl}}</span>
+<span style="color: #374151">{{c.margin}}</span>
+<span><span style="font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; border: 1px solid {{c.hBd}}; background: {{c.hBg}}; color: {{c.hFg}}; white-space: nowrap">{{c.health}}</span></span>
+</div>
+</sc-for>
+</div></div>
+<div style="margin-top: 10px; font-size: 11px; color: #6b7280">Targets: on-time 95%+, tender acceptance 90%+, dwell 2.0h or less, claims 0.5% or less. Green meets target, amber is within reach, red needs action.</div>
+</section>
+</div>
+</sc-if>

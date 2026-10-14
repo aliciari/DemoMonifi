@@ -1,0 +1,10 @@
+body{margin:0;background:#ffffff}
+a{color:#1d6fa5}a:hover{color:#1e3a6e}
+button{font:inherit;cursor:pointer}
+input,textarea,select{font:inherit}
+@keyframes fcPulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+#app{min-height:100vh}
+.boot-msg{font:14px Inter,system-ui,sans-serif;color:#6b7280;padding:24px}
+.boot-error{font:14px Inter,system-ui,sans-serif;color:#7f1d1d;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;margin:24px;padding:16px}
+.boot-error code{background:#fee2e2;padding:1px 4px;border-radius:4px}

@@ -1,0 +1,93 @@
+<!-- ============ ASSET MAP ============ -->
+<sc-if value="{{is.map}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px">
+<div>
+<h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #0f172a">Asset Map</h1>
+<p style="margin: 6px 0 0; font-size: 13px; color: #6b7280">All {{fc.total}} trucks across Ontario, Quebec and the US Northeast • Updated every second</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 12px; color: #374151">
+<sc-for list="{{statusLegend}}" as="g" hint-placeholder-count="6"><span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{g.color}}"></span>{{g.label}} ({{g.count}})</span></sc-for>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+<section style="flex: 3 1 640px; min-width: 0; background: #ffffff; border: 1px solid #e3e7ed; border-radius: 10px; padding: 10px">
+<div style="position: relative; width: 100%; aspect-ratio: 1000 / 612; border-radius: 8px; overflow: hidden; border: 1px solid #d5dae2; background: #f2efe6">
+<svg viewBox="0 0 1000 612" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block">
+<rect x="0" y="0" width="1000" height="612" fill="#f2efe6"></rect>
+<ellipse cx="{{geo.p1.cx}}" cy="{{geo.p1.cy}}" rx="{{geo.p1.rx}}" ry="{{geo.p1.ry}}" fill="#d7e9cd"></ellipse>
+<ellipse cx="{{geo.p2.cx}}" cy="{{geo.p2.cy}}" rx="{{geo.p2.rx}}" ry="{{geo.p2.ry}}" fill="#d7e9cd"></ellipse>
+<ellipse cx="{{geo.p3.cx}}" cy="{{geo.p3.cy}}" rx="{{geo.p3.rx}}" ry="{{geo.p3.ry}}" fill="#d7e9cd"></ellipse>
+<ellipse cx="{{geo.p4.cx}}" cy="{{geo.p4.cy}}" rx="{{geo.p4.rx}}" ry="{{geo.p4.ry}}" fill="#d7e9cd"></ellipse>
+<ellipse cx="{{geo.p5.cx}}" cy="{{geo.p5.cy}}" rx="{{geo.p5.rx}}" ry="{{geo.p5.ry}}" fill="#d7e9cd"></ellipse>
+<path d="{{geo.states}}" fill="none" stroke="#c9bfd6" stroke-width="1" stroke-dasharray="3 3"></path>
+<path d="{{geo.minor}}" fill="none" stroke="#dcd4c3" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="{{geo.minor}}" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="{{geo.water}}" fill="#aad3df" stroke="#8fc0d1" stroke-width="1"></path>
+<path d="{{geo.islands}}" fill="#f2efe6" stroke="#8fc0d1" stroke-width="1"></path>
+<path d="{{geo.rivers}}" fill="none" stroke="#aad3df" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="{{geo.streams}}" fill="none" stroke="#aad3df" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="{{geo.border}}" fill="none" stroke="#a08cc0" stroke-width="1.6" stroke-dasharray="8 4"></path>
+<path d="{{geo.hw}}" fill="none" stroke="#cf8b2a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="{{geo.hw}}" fill="none" stroke="#f8c95f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<sc-for list="{{mapRegions}}" as="g" hint-placeholder-count="0"><div style="position: absolute; left: {{g.l}}%; top: {{g.t}}%; transform: translate(-50%,-50%); font-size: 12px; font-weight: 600; letter-spacing: .22em; color: #8d7fa6; white-space: nowrap; pointer-events: none">{{g.name}}</div></sc-for>
+<sc-for list="{{mapWaters}}" as="g" hint-placeholder-count="0"><div style="position: absolute; left: {{g.l}}%; top: {{g.t}}%; transform: translate(-50%,-50%); font-size: 12px; font-style: italic; color: #2f6f87; white-space: nowrap; pointer-events: none">{{g.name}}</div></sc-for>
+<sc-for list="{{mapCities}}" as="c" hint-placeholder-count="0"><div style="position: absolute; left: {{c.l}}%; top: {{c.t}}%; width: {{c.d}}px; height: {{c.d}}px; transform: translate(-50%,-50%); border-radius: 50%; background: rgba(196,176,148,.55); border: 1px solid rgba(150,130,100,.5); pointer-events: none"></div><div style="position: absolute; left: {{c.l}}%; top: {{c.t}}%; transform: {{c.tf}}; font-size: {{c.fs}}px; font-weight: {{c.fw}}; color: #3b362e; white-space: nowrap; pointer-events: none; text-shadow: 0 0 2px #f2efe6, 0 0 3px #f2efe6, 0 0 4px #f2efe6">{{c.name}}</div></sc-for>
+<sc-for list="{{mapShields}}" as="h" hint-placeholder-count="0"><div style="position: absolute; left: {{h.l}}%; top: {{h.t}}%; transform: translate(-50%,-50%); font-size: 9px; font-weight: 800; line-height: 13px; padding: 0 3px; border-radius: 3px; border: 1.5px solid #1d4f91; background: {{h.bg}}; color: {{h.fg}}; white-space: nowrap; pointer-events: none">{{h.label}}</div></sc-for>
+<sc-for list="{{mapTerminals}}" as="p" hint-placeholder-count="0"><div style="position: absolute; left: {{p.l}}%; top: {{p.t}}%; transform: translate(-50%,-50%); pointer-events: none"><div style="width: 13px; height: 13px; border-radius: 3px; background: #0f3d66; border: 2px solid #ffffff; box-shadow: 0 1px 3px rgba(15,23,42,.4)"></div><div style="position: absolute; left: 50%; top: 17px; transform: translateX(-50%); font-size: 10px; font-weight: 700; color: #0f3d66; white-space: nowrap; text-shadow: 0 0 2px #f2efe6, 0 0 3px #f2efe6, 0 0 4px #f2efe6">{{p.name}}</div></div></sc-for>
+<sc-for list="{{fleetLive}}" as="tr" hint-placeholder-count="0">
+<button type="button" onClick="{{tr.pick}}" aria-label="{{tr.aria}}" style="position: absolute; left: {{tr.l}}%; top: {{tr.t}}%; z-index: {{tr.z}}; transform: translate(-50%,-50%); transition: left 1s linear, top 1s linear; width: 30px; height: 30px; padding: 0; border: 0; background: transparent; cursor: pointer">
+<span style="position: absolute; left: 6px; top: 6px; width: 18px; height: 18px; box-sizing: border-box; border-radius: 50%; background: {{tr.color}}; border: 2px solid #ffffff; box-shadow: 0 1px 4px rgba(15,23,42,.45), 0 0 0 {{tr.ring}} rgba(29,111,165,.28); display: flex; align-items: center; justify-content: center; animation: {{tr.anim}}"><span style="display: flex; transform: rotate({{tr.deg}}deg)"><svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true"><path d="{{tr.glyph}}" fill="#ffffff"></path></svg></span></span>
+<span style="display: {{tr.labelDisplay}}; position: absolute; left: 26px; top: 7px; font-size: 10px; font-weight: 700; line-height: 15px; color: #0f172a; background: rgba(255,255,255,.95); border: 1px solid {{tr.labelBd}}; border-radius: 3px; padding: 0 4px; white-space: nowrap">{{tr.id}}</span>
+</button>
+</sc-for>
+<div style="position: absolute; right: 10px; top: 10px; display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,.94); border: 1px solid #e3e7ed; border-radius: 6px; padding: 4px 10px; font-size: 12px; font-weight: 600; color: #0f172a"><span style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: fcPulse 1.4s ease-in-out infinite"></span>LIVE • {{clock}}</div>
+<div style="position: absolute; left: 1.5%; bottom: 2.5%; width: 30%; pointer-events: none"><div style="width: 35.2%; height: 6px; border: 1.5px solid #3b362e; border-top: 0; box-sizing: border-box"></div><div style="margin-top: 2px; font-size: 10px; font-weight: 600; color: #3b362e">100 km</div></div>
+<div style="position: absolute; right: 10px; bottom: 10px; width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.94); border: 1px solid #e3e7ed; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: #3b362e; pointer-events: none">N</div>
+</div>
+</section>
+
+<aside style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<section style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 10px; padding: 16px" aria-live="polite">
+<div style="display: flex; align-items: center; gap: 10px">
+<span style="width: 12px; height: 12px; border-radius: 50%; background: {{selTruck.color}}"></span>
+<span style="font-size: 20px; font-weight: 700; color: #0f172a">{{selTruck.id}}</span>
+<span style="font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: {{selTruck.pillBg}}; color: {{selTruck.pillFg}}">{{selTruck.statusLabel}}</span>
+</div>
+<div style="margin-top: 4px; font-size: 13px; color: #4b5563">{{selTruck.make}} • {{selTruck.type}} • {{selTruck.driverTxt}}</div>
+<sc-if value="{{selTruck.hasNote}}" hint-placeholder-val="{{false}}"><div style="margin-top: 10px; padding: 8px 10px; border-radius: 6px; background: {{selTruck.pillBg}}; color: {{selTruck.pillFg}}; font-size: 12px; font-weight: 600">{{selTruck.note}}</div></sc-if>
+<div style="margin-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px">
+<div><div style="font-size: 11px; color: #6b7280">Lane</div><div style="margin-top: 2px; font-size: 13px; font-weight: 600; color: #0f172a">{{selTruck.lane}}</div></div>
+<div><div style="font-size: 11px; color: #6b7280">Load</div><div style="margin-top: 2px; font-size: 13px; font-weight: 600; color: #0f172a">{{selTruck.loadTxt}}</div></div>
+<div><div style="font-size: 11px; color: #6b7280">Speed</div><div style="margin-top: 2px; font-size: 13px; font-weight: 600; color: #0f172a">{{selTruck.speedTxt}}</div></div>
+<div><div style="font-size: 11px; color: #6b7280">{{selTruck.etaLabel}}</div><div style="margin-top: 2px; font-size: 13px; font-weight: 600; color: #0f172a">{{selTruck.etaTxt}}</div></div>
+</div>
+<sc-if value="{{selTruck.hasRoute}}" hint-placeholder-val="{{false}}">
+<div style="margin-top: 14px">
+<div style="display: flex; justify-content: space-between; gap: 8px; font-size: 11px; color: #6b7280"><span>{{selTruck.from}}</span><span>{{selTruck.pctTxt}}</span><span>{{selTruck.to}}</span></div>
+<div style="margin-top: 4px; height: 6px; border-radius: 3px; background: #e5e8ed"><div style="width: {{selTruck.pctTxt}}; height: 6px; border-radius: 3px; background: #6cb3e3; transition: width 1s linear"></div></div>
+</div>
+</sc-if>
+<div style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px">
+<sc-if value="{{selTruck.hasAction}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{selTruck.action}}" style="flex: 1 1 100%; min-height: 38px; border: 0; border-radius: 8px; background: #1e3a6e; color: #ffffff; font-size: 12px; font-weight: 700">{{selTruck.actionLabel}}</button></sc-if>
+<button type="button" onClick="{{selTruck.contact}}" style="flex: 1 1 110px; min-height: 38px; border: 0; border-radius: 8px; background: #1e3a6e; color: #ffffff; font-size: 12px; font-weight: 700">Contact driver</button>
+<button type="button" onClick="{{selTruck.diag}}" style="flex: 1 1 110px; min-height: 38px; border: 1px solid #d5dae2; border-radius: 8px; background: #ffffff; color: #1d6fa5; font-size: 12px; font-weight: 700">Diagnostics</button>
+</div>
+</section>
+<section style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 10px; padding: 16px">
+<h2 style="display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #4b5563">All trucks ({{fc.total}})</h2>
+<div style="display: flex; flex-direction: column; gap: 4px; max-height: 460px; overflow-y: auto">
+<sc-for list="{{truckList}}" as="r" hint-placeholder-count="8">
+<button type="button" onClick="{{r.pick}}" style="display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; padding: 6px 10px; border: 1px solid {{r.rowBd}}; border-radius: 8px; background: {{r.rowBg}}; text-align: left; color: #0f172a">
+<span style="width: 10px; height: 10px; flex-shrink: 0; border-radius: 50%; background: {{r.color}}"></span>
+<span style="flex-grow: 1; min-width: 0"><span style="display: block; font-weight: 700; font-size: 13px">{{r.id}} <span style="font-weight: 500; color: #6b7280">• {{r.statusLabel}}</span></span><span style="display: block; font-size: 11px; color: #6b7280; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.lane}}</span></span>
+<span style="font-size: 12px; font-weight: 600; color: {{r.pillFg}}; white-space: nowrap">{{r.speedTxt}}</span>
+</button>
+</sc-for>
+</div>
+</section>
+</aside>
+</div>
+</div>
+</sc-if>

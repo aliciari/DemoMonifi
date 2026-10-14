@@ -1,0 +1,15 @@
+{
+  "default": "toronto-baseline",
+  "scenarios": [
+    {
+      "id": "toronto-baseline",
+      "name": "Baseline week",
+      "description": "50 trucks, 57 drivers, 49 loads; healthy cash ($600K opening)."
+    },
+    {
+      "id": "tight-cash",
+      "name": "Tight cash",
+      "description": "Same fleet and loads, but customers pay about 3 days later and opening cash is $450K. Shows how finance.json drives the cash story."
+    }
+  ]
+}

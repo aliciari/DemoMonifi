@@ -1,0 +1,55 @@
+<!-- ============ LABOUR ============ -->
+<sc-if value="{{is.labour}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div>
+<h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #0f172a">Labour Management</h1>
+<p style="margin: 6px 0 0; font-size: 13px; color: #6b7280">Cost analysis • Overtime and HOS control • Productivity optimization</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px">
+<sc-for list="{{labKpis}}" as="k" hint-placeholder-count="4">
+<div style="background: {{k.bg}}; border: 1px solid {{k.bd}}; border-radius: 10px; padding: 14px 16px"><div style="font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #6b7280">{{k.label}}</div><div style="margin-top: 6px; font-size: 24px; font-weight: 700; color: {{k.color}}">{{k.value}}</div><div style="margin-top: 4px; font-size: 12px; color: {{k.subColor}}">{{k.sub}}</div></div>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
+<section style="flex: 1 1 420px; min-width: 0; background: #ffffff; border: 1px solid #e3e7ed; border-radius: 10px; padding: 16px">
+<h2 style="margin: 0 0 14px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #4b5563">Monthly Labour Cost Breakdown</h2>
+<div role="img" aria-label="Stacked bar chart of monthly labour cost: regular pay with an overtime cap each month" style="display: flex; gap: 8px">
+<div style="display: flex; flex-direction: column; justify-content: space-between; height: 220px; font-size: 10px; color: #6b7280; text-align: right; padding-bottom: 18px"><span>$1000K</span><span>$750K</span><span>$500K</span><span>$250K</span><span>$0K</span></div>
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="position: relative; height: 202px; border-left: 1px solid #d5dae2; border-bottom: 1px solid #d5dae2; background-image: linear-gradient(rgba(90,110,150,.12) 1px, transparent 1px); background-size: 100% 25%; display: flex; align-items: flex-end; gap: 6px; padding: 0 6px">
+<sc-for list="{{labBars}}" as="b" hint-placeholder-count="12"><div style="flex: 1 1 0; height: {{b.h}}; display: flex; flex-direction: column"><div style="height: {{b.ot}}; background: #f59e0b; border-radius: 2px 2px 0 0"></div><div style="flex-grow: 1; background: #3b82f6"></div></div></sc-for>
+</div>
+<div style="display: flex; gap: 6px; padding: 4px 6px 0; font-size: 10px; color: #6b7280"><sc-for list="{{labBars}}" as="b" hint-placeholder-count="12"><span style="flex: 1 1 0; text-align: center">{{b.m}}</span></sc-for></div>
+</div>
+</div>
+<div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 16px; font-size: 11px; color: #4b5563"><span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; background: #3b82f6"></span>Regular</span><span style="display: flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; background: #f59e0b"></span>Overtime</span></div>
+</section>
+<section style="flex: 1 1 380px; min-width: 0; background: #ffffff; border: 1px solid #e3e7ed; border-radius: 10px; padding: 16px">
+<h2 style="margin: 0 0 14px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #4b5563">Top Overtime Drivers — Rebalancing Candidates</h2>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{otDrivers}}" as="d" hint-placeholder-count="5">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #f4f6f9; border-radius: 8px; padding: 10px 12px">
+<div><div style="font-weight: 600; font-size: 13px">{{d.name}}</div><div style="font-size: 11px; color: #6b7280">{{d.meta}}</div></div>
+<div style="text-align: right"><div style="font-weight: 700; color: #c2410c; font-size: 13px">{{d.ot}}</div><div style="font-size: 11px; color: #6b7280">{{d.extra}}</div></div>
+</div>
+</sc-for>
+</div>
+<button type="button" onClick="{{rebalBtn.click}}" style="margin-top: 12px; width: 100%; min-height: 40px; border: 0; border-radius: 8px; background: {{rebalBtn.bg}}; color: {{rebalBtn.fg}}; font-size: 13px; font-weight: 700">{{rebalBtn.label}}</button>
+</section>
+</div>
+<section style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 10px; padding: 16px">
+<h2 style="margin: 0 0 14px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #4b5563">Productivity Leaders — Benchmark for Training</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px">
+<sc-for list="{{leaders}}" as="l" hint-placeholder-count="5">
+<div style="background: {{l.bg}}; border-radius: 8px; padding: 14px; text-align: center; display: flex; flex-direction: column; gap: 4px">
+<div style="font-size: 11px; color: #6b7280">#{{l.rank}}</div>
+<div style="font-weight: 600">{{l.name}}</div>
+<div style="font-size: 26px; font-weight: 700; color: {{l.color}}">{{l.miles}}</div>
+<div style="font-size: 11px; color: #6b7280">miles/day</div>
+<div style="font-size: 11px; color: #4b5563">Safety: <span style="color: {{l.safetyColor}}">{{l.safety}}</span></div>
+</div>
+</sc-for>
+</div>
+</section>
+</div>
+</sc-if>

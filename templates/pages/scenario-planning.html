@@ -1,0 +1,149 @@
+<!-- ============ SCENARIO PLANNING ============ -->
+<sc-if value="{{is.scen}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 18px; max-width: 1360px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px">
+<div style="flex: 1 1 460px"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #0f172a">Scenario Planning</h1><span style="font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: #fef3c7; color: #78350f">Synthetic demo data</span></div><p style="margin: 6px 0 0; font-size: 13px; color: #6b7280">Compare ways to optimize the operation against your 30, 60 and 90-day targets, then approve the one you want.</p></div>
+<button type="button" onClick="{{runDemo}}" style="min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; border: 0; border-radius: 8px; background: #1e3a6e; color: #ffffff; font-size: 13px; font-weight: 700; white-space: nowrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg>Run Demo</button>
+</div>
+
+
+<section id="targetScen" aria-label="Choose a scenario" style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<div><h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #0f172a">Choose a scenario to optimize operations</h2><p style="margin: 4px 0 0; font-size: 13px; color: #6b7280">Pick a scenario to see what it does to your 30, 60 and 90-day targets. Nothing changes until you approve and apply it.</p></div>
+<sc-if value="{{scenApplied.has}}" hint-placeholder-val="{{false}}"><div style="font-size: 12px; color: #1e3a6e; font-weight: 600">{{scenApplied.txt}}</div></sc-if>
+<sc-if value="{{scenNone}}" hint-placeholder-val="{{false}}"><div style="font-size: 13px; color: #374151">Every available scenario has been applied.</div></sc-if>
+<div role="radiogroup" aria-label="Scenarios" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px">
+<sc-for list="{{scenCards}}" as="sc" hint-placeholder-count="6"><button type="button" role="radio" aria-checked="{{sc.on}}" onClick="{{sc.pick}}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px; border: {{sc.bw}} solid {{sc.bd}}; border-radius: 10px; background: {{sc.bg}}; text-align: left; min-height: 150px"><span style="font-size: 15px; font-weight: 700; color: #0f172a">{{sc.label}}</span><span style="font-size: 12px; line-height: 1.45; color: #4b5563">{{sc.what}}</span><span style="font-size: 12px; font-weight: 700; color: #1e3a6e">{{sc.gaps}}</span><sc-if value="{{sc.hasEff}}" hint-placeholder-val="{{true}}"><span style="font-size: 11px; color: #6b7280">{{sc.effNote}}</span><sc-for list="{{sc.eff}}" as="ef" hint-placeholder-count="3"><span style="font-size: 12px; font-weight: 600; color: {{ef.fg}}">{{ef.txt}}</span></sc-for></sc-if><span style="display: inline-flex; align-items: center; gap: 5px; margin-top: auto; padding: 2px 8px; border-radius: 999px; background: #eef2f8; color: #1e3a6e; font-size: 11px; font-weight: 700"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"></path></svg>Needs your approval</span></button></sc-for>
+</div>
+<sc-if value="{{scenDetail.has}}" hint-placeholder-val="{{true}}">
+<div style="border: 1px solid #c6d3e6; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; background: #fbfcfe">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 10px"><div style="flex: 1 1 420px"><div style="font-size: 18px; font-weight: 700; color: #0f172a">{{scenDetail.label}}</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.5; color: #374151">{{scenDetail.what}} {{scenDetail.lead}}</div><div style="margin-top: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #1e3a6e"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"></path></svg>Human approval required. Nothing changes until you confirm, and the approval is logged under your name.</div></div><button type="button" onClick="{{scenDetail.approve}}" style="min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; border: 0; border-radius: 8px; background: #1e3a6e; color: #ffffff; font-size: 13px; font-weight: 700; white-space: nowrap">{{scenDetail.btnLabel}}</button></div>
+<div style="overflow-x: auto"><div role="table" style="min-width: 640px; font-size: 13px; border: 1px solid #e3e7ed; border-radius: 8px; overflow: hidden; background: #ffffff">
+<div role="row" style="display: grid; grid-template-columns: 1.3fr repeat(3, 1fr); background: #f8fafc; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: #4b5563"><div role="columnheader" style="padding: 8px 10px">Target</div><div role="columnheader" style="padding: 8px 10px">30 days</div><div role="columnheader" style="padding: 8px 10px">60 days</div><div role="columnheader" style="padding: 8px 10px">90 days</div></div>
+<sc-for list="{{scenDetail.rows}}" as="sr" hint-placeholder-count="6"><div role="row" style="display: grid; grid-template-columns: 1.3fr repeat(3, 1fr); border-top: 1px solid #eef0f3"><div role="cell" style="padding: 8px 10px; font-weight: 600; color: #0f172a">{{sr.label}}</div><sc-for list="{{sr.cells}}" as="sx" hint-placeholder-count="3"><div role="cell" style="padding: 8px 10px; line-height: 1.4"><div><span style="color: #6b7280">Now</span> {{sx.now}} → <b style="color: {{sx.withFg}}">{{sx.with}}</b></div><div style="font-size: 11px; color: {{sx.withFg}}">{{sx.withSt}} ({{sx.target}})</div></div></sc-for></div></sc-for>
+</div></div>
+<div style="font-size: 12px; font-weight: 700; color: #1e3a6e">{{scenDetail.closes}}</div>
+<sc-if value="{{scenDetail.hasWorsens}}" hint-placeholder-val="{{false}}"><div style="font-size: 12px; font-weight: 700; color: #b91c1c">{{scenDetail.worsens}}</div></sc-if>
+<div style="font-size: 12px; color: #374151">{{scenDetail.cost}}</div>
+<div style="font-size: 12px; color: #374151">{{scenDetail.trade}}</div>
+<sc-if value="{{pkgPend.has}}" hint-placeholder-val="{{false}}">
+<div role="alertdialog" aria-label="Confirm scenario" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px; border-radius: 10px; border: 2px solid #1e3a6e; background: #f5f8fc; background: #ffffff"><div style="flex: 1 1 380px"><div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #1e3a6e">Approve and apply this scenario?</div><div style="font-size: 14px; font-weight: 700; color: #0f172a">{{pkgPend.label}}</div><div style="font-size: 12px; line-height: 1.5; color: #374151">{{pkgPend.effect}}</div></div><div style="display: flex; gap: 8px"><button type="button" onClick="{{pkgPend.cancel}}" style="min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; border: 1px solid #1e3a6e; border-radius: 8px; background: #ffffff; color: #1e3a6e; font-size: 13px; font-weight: 700; white-space: nowrap">Cancel</button><button type="button" onClick="{{pkgPend.confirm}}" style="min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; border: 0; border-radius: 8px; background: #1e3a6e; color: #ffffff; font-size: 13px; font-weight: 700; white-space: nowrap">Approve as John Jones</button></div></div>
+</sc-if>
+</div>
+</sc-if>
+</section>
+
+<details style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 18px; padding: 0">
+<summary style="cursor: pointer; padding: 16px 18px; font-size: 15px; font-weight: 700; color: #1e3a6e">More tools: breakdowns, trucks-down what-if, resources, disruptions and decision log</summary>
+<div style="display: flex; flex-direction: column; gap: 18px; padding: 0 18px 18px">
+<sc-if value="{{autoBanner.has}}" hint-placeholder-val="{{true}}">
+<section aria-label="Active breakdowns" style="border: 1px solid rgba(220,38,38,.55); background: rgba(239,68,68,.06); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18v.5"></path></svg>
+<div style="flex: 1 1 320px"><div style="font-size: 16px; font-weight: 700; color: #0f172a">{{autoBanner.title}}</div><div style="font-size: 13px; color: #374151">{{autoBanner.ids}}</div></div>
+<button type="button" onClick="{{autoBanner.open}}" style="min-height: 40px; display: inline-flex; align-items: center; gap: 8px; padding: 0 16px; border: 0; border-radius: 8px; background: #dc2626; color: #ffffff; font-size: 13px; font-weight: 700"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg>Auto-Reroute Now</button>
+</div>
+<sc-if value="{{autoBanner.pend}}" hint-placeholder-val="{{false}}">
+<div role="alertdialog" aria-label="Confirm auto-reroute" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px; border-radius: 10px; border: 2px solid #1e3a6e; background: #f5f8fc; background: #ffffff">
+<div style="flex: 1 1 420px"><div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #1e3a6e">Approve these recommended responses?</div>
+<ul style="margin: 6px 0 0; padding-left: 18px; font-size: 13px; line-height: 1.6; color: #0f172a"><sc-for list="{{autoBanner.list}}" as="b" hint-placeholder-count="3"><li><b>{{b.id}}</b> • Load {{b.load}}: {{b.action}}</li></sc-for></ul>
+<div style="margin-top: 4px; font-size: 12px; color: #4b5563">Each response is checked against trucks and on-call drivers already committed, then logged with its rationale.</div></div>
+<div style="display: flex; gap: 8px"><button type="button" onClick="{{autoBanner.cancel}}" style="min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; border: 1px solid #1e3a6e; border-radius: 8px; background: #ffffff; color: #1e3a6e; font-size: 13px; font-weight: 700; white-space: nowrap">Cancel</button><button type="button" onClick="{{autoBanner.confirm}}" style="min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; border: 0; border-radius: 8px; background: #1e3a6e; color: #ffffff; font-size: 13px; font-weight: 700; white-space: nowrap">Approve reroute as John Jones</button></div>
+</div>
+</sc-if>
+</section>
+</sc-if>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 16px; align-items: start">
+<section aria-label="Scenario modeling" style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="display: flex; align-items: center; gap: 8px; margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #374151"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"></path></svg>Scenario modeling</h2>
+<div role="group" aria-label="Trucks down" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px">
+<sc-for list="{{scenOpts}}" as="o" hint-placeholder-count="4"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.on}}" style="min-height: 92px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border: {{o.bw}} solid {{o.bd}}; border-radius: 10px; background: {{o.bg}}; color: {{o.fg}}"><span style="font-size: 28px; font-weight: 700">{{o.n}}</span><span style="font-size: 12px; color: #4b5563">{{o.unit}}</span></button></sc-for>
+</div>
+<div style="background: #f8fafc; border: 1px solid #e3e7ed; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div><div style="font-size: 15px; font-weight: 700; color: #0f172a">{{impact.title}}</div><div style="margin-top: 2px; font-size: 12px; color: #6b7280">{{impact.trucks}}</div></div>
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 20px">
+<div><div style="font-size: 12px; color: #6b7280">Coverage loss</div><div style="font-size: 24px; font-weight: 700; color: #dc2626">{{impact.cov}}</div></div>
+<div><div style="font-size: 12px; color: #6b7280">Overtime increase</div><div style="font-size: 24px; font-weight: 700; color: #d97706">{{impact.ot}}</div></div>
+<div><div style="font-size: 12px; color: #6b7280">Cost impact</div><div style="font-size: 24px; font-weight: 700; color: #dc2626">{{impact.cost}}</div></div>
+<div><div style="font-size: 12px; color: #6b7280">Recovery time</div><div style="font-size: 24px; font-weight: 700; color: #0f172a">{{impact.rec}}</div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 18px; padding-top: 10px; border-top: 1px solid #e3e7ed; font-size: 12px; color: #374151"><span>On-time: <b>{{impact.otd}}</b></span><span>Loads at risk: <b>{{impact.risk}}</b></span><span>Margin: <b>{{impact.margin}}</b></span></div>
+<div style="font-size: 12px; color: #4b5563; line-height: 1.6"><b>30-day targets:</b><sc-for list="{{wiTargets}}" as="wt" hint-placeholder-count="4"><br>{{wt.label}}: now {{wt.cur}} → no response {{wt.no}} → optimized plan {{wt.opt}} (target {{wt.t}})</sc-for></div>
+<div style="background: rgba(30,58,110,.06); border: 1px solid #c6d3e6; border-radius: 8px; padding: 10px 12px"><div style="font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #1e3a6e">AI recommendation</div><div style="margin-top: 3px; font-size: 14px; font-weight: 600; color: #0f172a">{{impact.ai}}</div></div>
+</div>
+</section>
+
+<section aria-label="Optimization engine" style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="display: flex; align-items: center; gap: 8px; margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #374151"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg>Optimization engine</h2>
+<div style="font-size: 12px; color: #6b7280">Optimization priorities</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{prios}}" as="p" hint-placeholder-count="4"><label style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #0f172a; cursor: pointer"><input type="checkbox" checked="{{p.on}}" onChange="{{p.toggle}}" style="width: 18px; height: 18px; accent-color: #1e3a6e">{{p.label}}</label></sc-for>
+</div>
+<button type="button" onClick="{{runOpt}}" style="min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 8px; background: #1e3a6e; color: #ffffff; font-size: 14px; font-weight: 700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>Run Optimization</button>
+<sc-if value="{{noPrio}}" hint-placeholder-val="{{false}}"><div style="font-size: 13px; color: #b45309">{{optResult}}</div></sc-if>
+<sc-if value="{{optRun}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-size: 14px; font-weight: 700; color: #0f172a">{{optRes.title}}</div>
+<sc-for list="{{optRes.rows}}" as="r" hint-placeholder-count="2"><div style="border: 1px solid #e3e7ed; border-left: 4px solid #1e3a6e; border-radius: 8px; padding: 10px 12px"><div style="display: flex; justify-content: space-between; gap: 8px; font-size: 13px"><b>{{r.down}} down → {{r.what}}</b><span style="white-space: nowrap; color: #1e3a6e; font-weight: 700">{{r.mins}} min</span></div><div style="font-size: 12px; color: #374151">{{r.who}}</div><div style="font-size: 12px; color: {{r.noteFg}}">{{r.note}}</div></div></sc-for>
+<div role="table" style="font-size: 12px; border: 1px solid #e3e7ed; border-radius: 8px; overflow: hidden">
+<div role="row" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr; background: #f8fafc; color: #4b5563; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; font-size: 11px"><div role="columnheader" style="padding: 7px 10px">Measure</div><div role="columnheader" style="padding: 7px 10px">No response</div><div role="columnheader" style="padding: 7px 10px">Optimized</div></div>
+<sc-for list="{{optRes.metrics}}" as="m" hint-placeholder-count="7"><div role="row" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr; border-top: 1px solid #eef0f3"><div role="cell" style="padding: 7px 10px; font-weight: 600">{{m.label}}</div><div role="cell" style="padding: 7px 10px; color: #b91c1c">{{m.a}}</div><div role="cell" style="padding: 7px 10px; color: #1e3a6e; font-weight: 700">{{m.b}}</div></div></sc-for>
+</div>
+<div style="font-size: 12px; color: #4b5563">{{optRes.saving}}</div>
+</div>
+</sc-if>
+</section>
+</div>
+
+<section aria-label="Available resources for reallocation" style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px"><h2 style="display: flex; align-items: center; gap: 8px; margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #374151"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6h13v10H1zM14 10h4l3 3v3h-7z"></path><circle cx="5.5" cy="18" r="1.8"></circle><circle cx="17.5" cy="18" r="1.8"></circle></svg>Available resources for reallocation</h2><span style="font-size: 12px; color: #4b5563">{{resCount.avail}} trucks available • {{resCount.onCall}} on-call drivers free • 4 partner carriers</span></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px">
+<sc-for list="{{onCallCards}}" as="oc" hint-placeholder-count="3"><article style="border: 1px solid #c6e2f5; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 4px; background: #f8fbfe"><div style="display: flex; justify-content: space-between; align-items: center; gap: 6px"><span style="font-size: 14px; font-weight: 700; color: #0f172a">{{oc.id}}</span><span style="font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: {{oc.pillBg}}; color: {{oc.pillFg}}">{{oc.statusLabel}}</span></div><div style="font-size: 12px; color: #6b7280">{{oc.type}}</div><div style="font-size: 12px; color: #6b7280">{{oc.fuel}}</div><sc-if value="{{oc.canToggle}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{oc.toggle}}" style="margin-top: 4px; align-self: flex-start; border: 0; background: none; padding: 2px 0; color: #1d6fa5; font-size: 12px; font-weight: 700; text-decoration: underline">{{oc.toggleLabel}}</button></sc-if></article></sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; max-height: 560px; overflow-y: auto; padding-right: 4px">
+<sc-for list="{{resources}}" as="r" hint-placeholder-count="10">
+<article style="border: 1px solid {{r.bd}}; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 4px; background: #ffffff">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 6px"><span style="font-size: 14px; font-weight: 700; color: #0f172a">{{r.id}}</span><span style="font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: {{r.pillBg}}; color: {{r.pillFg}}">{{r.statusLabel}}</span></div>
+<div style="font-size: 12px; color: #6b7280">{{r.type}}</div>
+<div style="font-size: 12px; color: #6b7280">Fuel: <span style="font-weight: 700; color: {{r.fuelFg}}">{{r.fuel}}</span></div>
+<sc-if value="{{r.hasDriver}}" hint-placeholder-val="{{true}}"><div style="margin-top: 2px; font-size: 12px; background: #f4f6f9; border-radius: 6px; padding: 4px 8px; color: #0f172a">{{r.driverLine}}<span style="color: {{r.otFg}}">{{r.otTxt}}</span></div></sc-if>
+<sc-if value="{{r.hasTag}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: {{r.tagBg}}; color: {{r.tagFg}}">{{r.tag}}</span></sc-if>
+<sc-if value="{{r.canToggle}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{r.toggle}}" style="margin-top: 4px; align-self: flex-start; border: 0; background: none; padding: 2px 0; color: #1d6fa5; font-size: 12px; font-weight: 700; text-decoration: underline">{{r.toggleLabel}}</button></sc-if>
+</article>
+</sc-for>
+</div>
+</section>
+
+<section aria-label="Simulate disruption" style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<div><h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #0f172a">Simulate a specific disruption</h2><p style="margin: 4px 0 0; font-size: 13px; color: #6b7280">Each event changes the same operation the Dashboard, map, fleet and reports use. Combine several to stress the plan.</p></div>
+<div role="group" aria-label="Disruption types" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{disOpts}}" as="d" hint-placeholder-count="5"><button type="button" onClick="{{d.toggle}}" aria-pressed="{{d.on}}" style="min-height: 40px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 6px 14px; border-radius: 8px; border: 1px solid {{d.bd}}; background: {{d.bg}}; color: {{d.fg}}; font-size: 13px; font-weight: 700; text-align: left">{{d.label}}<span style="font-size: 11px; font-weight: 500">{{d.stateTxt}}</span></button></sc-for>
+</div>
+<sc-if value="{{hasDis}}" hint-placeholder-val="{{false}}">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 10px">
+<sc-for list="{{disActive}}" as="d" hint-placeholder-count="1">
+<article style="border: 1px solid rgba(239,68,68,.35); background: rgba(239,68,68,.04); border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 10px"><div style="font-size: 14px; font-weight: 700; color: #0f172a">{{d.title}}</div><span style="font-size: 11px; font-weight: 700; color: #b91c1c; white-space: nowrap">{{d.kind}}</span></div>
+<div style="font-size: 13px; color: #374151; line-height: 1.5">{{d.why}}</div>
+<ul style="margin: 0; padding-left: 18px; font-size: 12px; line-height: 1.6"><sc-for list="{{d.loads}}" as="a" hint-placeholder-count="1"><li><b>#{{a.no}} {{a.cust}}</b> • {{a.status}} • {{a.why}}</li></sc-for></ul>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><div style="font-size: 12px"><span style="color: #6b7280">Respond by </span><b>{{d.deadline}}</b> <span style="color: {{d.remFg}}; font-weight: 700">{{d.rem}}</span></div><button type="button" onClick="{{d.compare}}" style="min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; border: 0; border-radius: 8px; background: #1e3a6e; color: #ffffff; font-size: 13px; font-weight: 700; white-space: nowrap">{{d.cta}}</button></div>
+</article>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{noDis}}" hint-placeholder-val="{{true}}"><div style="font-size: 13px; color: #6b7280">No disruptions simulated. The comparison below shows today’s plan.</div></sc-if>
+</section>
+
+<section aria-label="Plan comparison" style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<div><h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #0f172a">Plan comparison</h2><p style="margin: 4px 0 0; font-size: 13px; color: #6b7280">Same calculations as the Dashboard, for {{periodTxt}}. Best achievable assumes every feasible recommended response and network change is approved.</p></div>
+<div style="overflow-x: auto"><div role="table" style="min-width: 760px; font-size: 13px; color: #1f2937"><div role="row" style="display: grid; grid-template-columns: minmax(180px, 1.6fr) repeat(5, minmax(100px, 1fr)); background: #f8fafc"><div role="columnheader" style="padding: 9px 10px; font-size: 11px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; position: relative">Measure</div><div role="columnheader" style="padding: 9px 10px; font-size: 11px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; position: relative">Plan before disruptions</div><div role="columnheader" style="padding: 9px 10px; font-size: 11px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; position: relative">Disruptions, no response</div><div role="columnheader" style="padding: 9px 10px; font-size: 11px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; position: relative">Current plan</div><div role="columnheader" style="padding: 9px 10px; font-size: 11px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; position: relative">Best achievable</div><div role="columnheader" style="padding: 9px 10px; font-size: 11px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; position: relative">Goal</div></div><sc-for list="{{scenRows}}" as="r" hint-placeholder-count="4"><div role="row" style="display: grid; grid-template-columns: minmax(180px, 1.6fr) repeat(5, minmax(100px, 1fr)); border-top: 1px solid #e3e7ed; align-items: start"><div role="cell" style="padding: 9px 10px; font-weight: 600">{{r.label}}</div><div role="cell" style="padding: 9px 10px">{{r.a}}</div><div role="cell" style="padding: 9px 10px; color: {{r.bFg}}">{{r.b}}</div><div role="cell" style="padding: 9px 10px; color: {{r.cFg}}; font-weight: 700">{{r.c}}</div><div role="cell" style="padding: 9px 10px">{{r.d}}</div><div role="cell" style="padding: 9px 10px; color: #4b5563">{{r.t}}</div></div></sc-for></div></div>
+</section>
+
+<section aria-label="Decision log" style="background: #ffffff; border: 1px solid #e3e7ed; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #0f172a">Decision log</h2>
+<sc-if value="{{noDecisions}}" hint-placeholder-val="{{true}}"><div style="font-size: 13px; color: #6b7280">No decisions approved yet.</div></sc-if>
+<sc-for list="{{decisions}}" as="d" hint-placeholder-count="2"><article style="border: 1px solid #e3e7ed; border-left: 4px solid #1e3a6e; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 4px"><div style="font-size: 12px; color: #6b7280">{{d.planT}} (demo clock) • approved {{d.t}} by {{d.by}} • Load {{d.no}} • {{d.cust}} • {{d.recTxt}}</div><div style="font-size: 14px; font-weight: 700; color: #0f172a">{{d.label}}</div><div style="font-size: 12px; line-height: 1.5; color: #374151"><b>Cause:</b> {{d.cause}}</div><div style="font-size: 12px; line-height: 1.5; color: #374151"><b>Rationale:</b> {{d.rationale}}</div><div style="font-size: 12px; line-height: 1.5; color: #374151"><b>Alternatives considered:</b> {{d.tradeoffs}}</div><div style="font-size: 12px; font-weight: 600; color: #1d4f91">{{d.effect}}</div></article></sc-for>
+</section>
+</div>
+</details>
+</div>
+</sc-if>

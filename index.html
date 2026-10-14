@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monifi — trucking operations simulation</title>
+<meta name="description" content="Interactive Monifi trucking operations simulation. All data is synthetic.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e3a6e'/%3E%3Cpath d='M16 44V22l16 14 16-14v22' fill='none' stroke='%236cb3e3' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<script>
+  /* Optional settings. To switch on the "Ask Monifi AI" box, point askAI at your own backend:
+     window.MONIFI_CONFIG = { askAI: async (prompt) => (await fetch('/api/ask', { method:'POST', body: prompt })).text() }; */
+  window.MONIFI_CONFIG = {};
+</script>
+</head>
+<body>
+<div id="app" data-loading>
+  <p class="boot-msg">Loading Monifi simulation…</p>
+</div>
+<noscript><p class="boot-msg">This simulation needs JavaScript.</p></noscript>
+
+<script src="js/vendor-morphdom.min.js"></script>
+<script src="js/runtime.js"></script>
+<script src="js/app.js"></script>
+<script src="js/data.js"></script>
+<script src="js/persist.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
